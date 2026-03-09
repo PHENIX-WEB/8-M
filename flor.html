@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mi Rosa 🌹</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #0b132b, #1b2a49 80%);
+  font-family: Georgia, serif;
+}
+
+/* ESTRELLAS */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity: .2; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+/* ESCENA */
+.scene {
+  position: relative;
+  width: 420px;
+  height: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* CUPULA */
+.dome {
+  position: absolute;
+  bottom: 0;
+  width: 360px;
+  height: 430px;
+  border-radius: 180px 180px 25px 25px;
+  background: rgba(255,255,255,.05);
+  border: 2px solid rgba(255,255,255,.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  box-shadow: 0 0 40px rgba(255,255,255,.3), inset 0 0 20px rgba(255,255,255,.2);
+  overflow: hidden;
+}
+
+/* SUELO */
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 240px;
+  height: 70px;
+  background: radial-gradient(circle at top, #7ed957, #3a7d44);
+  border-radius: 50%;
+  box-shadow: inset 0 0 15px rgba(0,0,0,.3);
+}
+
+/* ROSA */
+.rose {
+  position: absolute;
+  bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: sway 4s ease-in-out infinite;
+}
+@keyframes sway {
+  0% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+  100% { transform: rotate(-2deg); }
+}
+
+/* FLOR */
+.flower {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+/* PETALOS */
+.petal {
+  position: absolute;
+  width: 100px;
+  height: 110px;
+  background: radial-gradient(circle at 30% 30%, #ff8fa3, #c9184a 70%);
+  border-radius: 80px;
+  box-shadow: inset -5px -5px 10px rgba(255,255,255,.3),
+              0 0 20px rgba(255,90,95,.5);
+}
+.p1 { top:-20px; left:20px; }
+.p2 { top:10px; left:-10px; transform:rotate(-35deg); }
+.p3 { top:10px; left:50px; transform:rotate(35deg); }
+.p4 { top:40px; left:10px; }
+.p5 { top:40px; left:40px; }
+
+/* CENTRO */
+.center {
+  position: absolute;
+  top:35px;
+  left:45px;
+  width:45px;
+  height:45px;
+  background: radial-gradient(circle, #ff4d6d, #7f1d1d);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255,80,100,.6);
+}
+
+/* TALLO */
+.stem {
+  position: relative;
+  width: 10px;
+  height: 190px;
+  background: linear-gradient(#52b788,#2d6a4f);
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+}
+
+/* HOJAS */
+.leaf {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background: linear-gradient(#52b788,#2d6a4f);
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+}
+.l1 {
+  top: 60px;
+  left: -55px;
+  transform: rotate(-25deg);
+}
+.l2 {
+  top: 110px;
+  left: 10px;
+  transform: rotate(25deg);
+}
+
+/* TEXTO */
+.text {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  text-shadow: 0 0 12px rgba(255,255,255,.7);
+}
+
+/* PETALOS CAYENDO */
+.falling-petal {
+  position: absolute;
+  width: 25px;
+  height: 30px;
+  background: radial-gradient(circle at 30% 30%, #ff8fa3, #c9184a 70%);
+  border-radius: 50%;
+  opacity: 0.9;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(400px) rotate(180deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="dome">
+    <div class="ground"></div>
+    <div class="rose">
+      <div class="flower">
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="petal p4"></div>
+        <div class="petal p5"></div>
+        <div class="center"></div>
+      </div>
+      <div class="stem">
+        <div class="leaf l1"></div>
+        <div class="leaf l2"></div>
+      </div>
+    </div>
+  </div>
+  <div class="text">hasta que caiga el último pétalo ❤️</div>
+</div>
+
+<script>
+/* ESTRELLAS */
+for(let i=0;i<120;i++){
+  let star=document.createElement("div");
+  star.className="star";
+  star.style.top=Math.random()*100+"vh";
+  star.style.left=Math.random()*100+"vw";
+  star.style.width=(1+Math.random()*2)+"px";
+  star.style.height=star.style.width;
+  star.style.animationDuration=(2+Math.random()*3)+"s";
+  document.body.appendChild(star);
+}
+
+/* PETALOS CAYENDO DESDE LA FLOR */
+function createPetal(){
+  let petal=document.createElement("div");
+  petal.className="falling-petal";
+
+  // posición inicial: justo en la flor
+  let flower=document.querySelector(".flower");
+  let rect=flower.getBoundingClientRect();
+  let dome=document.querySelector(".dome");
+  let domeRect=dome.getBoundingClientRect();
+
+  // calcular posición relativa dentro de la cúpula
+  petal.style.left=(rect.left - domeRect.left + rect.width/2 - 10)+"px";
+  petal.style.top=(rect.top - domeRect.top)+"px";
+
+  // variaciones de animación
+  petal.style.animationDuration=(4+Math.random()*3)+"s";
+  petal.style.transform=`rotate(${Math.random()*60-30}deg)`;
+
+  dome.appendChild(petal);
+
+  setTimeout(()=>{ petal.remove(); },8000);
+}
+
+setInterval(createPetal,1200);
+</script>
+</body>
+<audio autoplay loop>
+    <source src="cancion.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+</audio>
+</html>
